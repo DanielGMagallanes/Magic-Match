@@ -1,0 +1,28 @@
+
+<div>
+    <ul>
+      <li><a class="active" href="#home">Home</a></li>
+      <li><a routerLink="/players">Players</a></li>
+      <li> <a routerLink="/matchHistory"> Match History</a></li> <!-- link works -->
+      <li><a routerLink="/memoryAction">Play Memory Game</a></li>
+      <li><a routerLink="/searchByCardName">Search</a></li>
+      <li><a href="#about">About</a></li>
+      <div *ngIf="playerViewModel.login; else elseBlock">
+        <li><a routerLink="/cardCollection">Card Collection </a></li>
+        <li><a routerLink="/cardDetails/1">Card Details</a></li>
+        <li><a routerLink="/memoryGame">Memory Game</a></li>
+        <li style="float:right"  (click)="IWannaLogOut()"><a href="#"> logout</a></li>
+      </div>
+      <ng-template  #elseBlock><div>
+        <li style="float:right"><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> <!--if the user already knows they don't have and account.-->
+        <li style="float:right" (click)="LoginPlease()"><a routerLink="/login"><span class="glyphicon glyphicon-user"></span>Login</a></li> <!--if the think they do but dont it will create one automatily.--> 
+      </div></ng-template>
+      <li></li>
+       
+    </ul>
+    
+</div>    
+<h1 style="align-self: center;">Welcome,{{playerViewModel.userName}}</h1>
+<router-outlet></router-outlet>
+
+<app-login [login]="login" (playerevent)="setPlayer($event)"></app-login>

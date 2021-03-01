@@ -1,0 +1,75 @@
+trigger:
+- main
+
+pr:
+- main
+
+pool:
+  vmImage: ubuntu-18.04
+
+stages:
+  - stage: analyze
+    displayName: Analyze
+    jobs:
+      - job: analyze
+        steps:
+          - task: Npm@1
+            displayName: Install Dependencies
+            inputs:
+              workingDir: FrontEnd/frontEnd/
+              command: install
+          - task: SonarCloudPrepare@1
+            inputs:
+              SonarCloud: sonar-srv-0
+              scannerMode: CLI
+              organization: p2the-pretzelmen
+              configFile: FrontEnd/frontEnd/sonar-project.properties
+          - task: Npm@1
+            displayName: Analyze Build
+            inputs:
+              workingDir: FrontEnd/frontEnd/
+              command: custom
+              customCommand: run build -- --prod
+          - task: Npm@1
+            displayName: Analyze Tests
+            inputs:
+              workingDir: FrontEnd/frontEnd/
+              command: custom
+              customCommand: run test-hl -- --code-coverage
+          - task: PublishCodeCoverageResults@1
+            displayName: Publish Code Coverage
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: FrontEnd/frontEnd/coverage/cobertura-coverage.xml
+              reportDirectory: FrontEnd/frontEnd/coverage
+              failIfCoverageEmpty: true
+          - task: SonarCloudAnalyze@1
+            displayName: Run Code Analysis
+          - task: SonarCloudPublish@1
+            displayName: Publish Code Analysis
+  - stage: deploy
+    displayName: Deploy
+    jobs:
+      - job: publish
+        steps:
+          - task: Docker@2
+            displayName: Login
+            inputs:
+              command: login
+              containerRegistry: docker-srv-1
+          - script: |
+              docker image build -f FrontEnd/frontEnd/dockerfile -t synaodev/magic-match:latest FrontEnd/frontEnd/
+              docker image push synaodev/magic-match:latest
+            displayName: Build & Push Image
+          - task: Docker@2
+            displayName: Logour
+            inputs:
+              command: logout
+              containerRegistry: docker-srv-1
+          - task: AzureWebAppContainer@1
+            displayName: Deploy
+            inputs:
+              azureSubscription: azure-srv-2
+              resourceGroupName: pretzelmen-group
+              appName: magic-match
+              containers: synaodev/magic-match:latest

@@ -1,0 +1,28 @@
+
+<div class="container">
+  <h2>Players</h2>
+ <div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Player ID</th>
+        <th>Firstname</th>
+        <th>Wins</th>
+        <th>Loses</th>
+        <th>Tokens</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr *ngFor="let player of playerList">
+
+            <td>{{player.playerId}}</td>
+            <td>{{player.userName}}</td>
+            <td>{{player.wins}}</td>
+            <td>{{player.losses}}</td>
+            <td>{{player.tokens}}</td>
+          </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+

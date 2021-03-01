@@ -1,0 +1,29 @@
+<h1>Memory Game </h1>
+<h2>Score  :{{score}}</h2>
+
+<div class="game">
+  
+
+  <button *ngFor=" let card of cards; let idx = index; " [disabled]="false" id="b+{{idx}}"
+  [attr.aria-label]="actionName" (click) ="clickedCard(card, idx)">
+    <div class="flip-card" >
+        <div id="{{idx}}">
+          <div class="flip-card-front">
+            <img src="./../assets/images/backOfMagicCard.png" alt="Avatar" style="width:300px;height:300px;">
+          </div>
+          <div id={{idx}}+f>
+            <img src="{{card.imgUl}}" alt="Avatar" style="width:300px;height:300px;">
+    
+          </div>
+        </div>
+    </div>
+  </button>
+
+
+</div>
+
+ 
+
+
+
+

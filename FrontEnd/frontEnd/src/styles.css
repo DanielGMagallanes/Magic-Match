@@ -1,0 +1,44 @@
+
+/* You can add global styles to this file, and also import other style files */
+body, html{
+    max-width: 100%;
+    overflow-x: hidden;
+    background-image: url("./assets/images/1__HhnCWCrqDSt__s5wFrKqQ.jpg");
+    
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*
+#wrapper{
+    margin-left: 5%;
+	margin-right: auto;
+	background-color: #f4f8f4;
+    width: 90%;
+    height: 95%;
+	min-width: 600px;
+	max-width: 2048px;
+	box-shadow: 3px 3px 3px #333333;
+		
+}
+*/
+header{
+    height: 130px;
+    background-image: url("./assets/images/1__HhnCWCrqDSt__s5wFrKqQ.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+#img{
+    width: auto;
+    height: 130px;
+    margin-left: 40%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

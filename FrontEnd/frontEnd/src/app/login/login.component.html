@@ -1,0 +1,26 @@
+
+<div class="container" *ngIf="login">
+    <form>
+        <h2>Login Player</h2>
+      <div class="form-group">
+        <label for="Fname">Username:</label>
+        <input type="text" class="form-control" id="username" required [(ngModel)]="loginPlayerViewModel.username" name="username" placeholder="User Name">
+        <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Name is required
+        </div> -->
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="Lname">Password</label>
+        <input type="password" class="form-control" id="password" required [(ngModel)]="loginPlayerViewModel.password" name="password" placeholder="Password">
+        <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+              Name is required
+            </div> -->
+      </div>
+      <button type="button" class="btn btn-default" (click)="OnSubmit()">Submit</button>
+    </form>
+  </div>
+  
+  
+  <!-- to display the player details, nest another "playerDetails" component here  and pass the returned player to it
+  using one-way binding '[child object]="parent object"' -->

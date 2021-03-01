@@ -1,0 +1,72 @@
+trigger:
+- main
+
+pr:
+- main
+
+pool:
+  vmImage: windows-latest
+
+stages:
+  - stage: analyze
+    displayName: Analyze
+    jobs:
+      - job: analyze
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: Restore Solution
+            inputs:
+              command: restore
+              projects: Backend/**/*.csproj
+          - task: SonarCloudPrepare@1
+            inputs:
+              SonarCloud: sonar-srv-0
+              organization: p2the-pretzelmen
+              scannerMode: MSBuild
+              projectKey: P2the-pretzelmen_backend
+              projectName: P2the-pretzelmen_backend
+              extraProperties: |
+                sonar.exclusions=**/obj/**,**/lib/**,**/*.dll
+          - script: dotnet build --configuration Release
+            displayName: Analyze Build
+            workingDirectory: Backend/
+          - task: DotNetCoreCLI@2
+            displayName: Analyze Tests
+            inputs:
+              command: test
+              projects: Backend/*Test/*.csproj
+              arguments: --configuration Release --collect "Code Coverage"
+          - task: PublishCodeCoverageResults@1
+            displayName: Publish Code Coverage
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(Agent.TempDirectory)/*/cobertura/coverage.xml
+          - task: SonarCloudAnalyze@1
+            displayName: Run Code Analysis
+          - task: SonarCloudPublish@1
+            displayName: Publish Code Analysis
+  - stage: deploy
+    displayName: Deploy
+    jobs:
+      - job: Deploy
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: Restore
+            inputs:
+              command: restore
+              projects: Backend/**/*.csproj
+          - task: DotNetCoreCLI@2
+            displayName: Publish
+            inputs:
+              command: publish
+              projects: Backend/BackendAPI/BackendAPI.csproj
+              publishWebProjects: false
+              zipAfterPublish: true
+          - task: AzureRmWebAppDeployment@4
+            displayName: Azure Web App
+            inputs:
+              ConnectionType: AzureRM
+              azureSubscription: azure-srv-2
+              appType: webApp
+              WebAppName: magic-match-api
+              packageForLinux: $(System.DefaultWorkingDirectory)/**/*.zip
