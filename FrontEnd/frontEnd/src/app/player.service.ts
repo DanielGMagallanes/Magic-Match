@@ -15,8 +15,8 @@ export class PlayerService {
   playerViewModel: PlayerViewModel = new PlayerViewModel();
   loginPlayerViewModel: LoginPlayerViewModel = new LoginPlayerViewModel();
   playerview :fullplayerview = new fullplayerview(); 
-   private userUrlRemote = "https://magic-match-api.azurewebsites.net/api/";
-   //private userUrlRemote = "https://localhost:44301/api/";
+   //private userUrlRemote = "https://magic-match-api.azurewebsites.net/api/";
+   private userUrlRemote = "https://localhost:44301/api/";
   //private jsonUlr = "https://jsonplaceholder.typicode.com/posts";
 
   httpOptions = {
@@ -112,7 +112,9 @@ addUser(user: LoginPlayerViewModel): void{
     return this.http.get<PlayerViewModel[]>(this.userUrlRemote + 'player/getplayers', this.httpOptions);
   }
 
-
+  getCard(url: string): Observable<Card> {
+    return this.http.get<Card>(url, this.httpOptions);
+  }
 
 
  /**

@@ -166,6 +166,17 @@ namespace BusinessLayer
                 return null;
             }
         }
+
+        /// <summary>
+        /// This is a method for getting a card within a collection by the 
+        /// id of the card.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<Card>> getCard(int id)
+        {
+            return await _gameRepositoryLayer.getCard(id);
+        }
         /// <summary>
         /// Getting the info we want from and storing it in a card to send back.
         /// If nothing is found than a empty card is returned

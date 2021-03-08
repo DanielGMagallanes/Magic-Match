@@ -30,9 +30,9 @@ namespace BackenAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //Uncomment this ou to use in-memory
-            services.AddDbContext<GameContext>(
-                opt => opt.UseInMemoryDatabase("TodoList")
-            );
+            //services.AddDbContext<GameContext>(
+            //    opt => opt.UseInMemoryDatabase("TodoList")
+            //);
             //Add cors with any origin
             services.AddCors(options =>
             {

@@ -37,6 +37,13 @@ namespace BackendAPI.Controllers
             return await _businessLayer.GetCards(id.collectionId.ToString());
         }
 
+        [HttpGet]
+        [Route("GetCard/{id}")]
+        public async Task<ActionResult<Card>> getCard(int id)
+        {
+            return await _businessLayer.getCard(id);
+        }
+
         //[HttpPost]
         //[Route("add")]
         //public async Task<ActionResult<Collection>> AddToCollection(CollectionViewModel collection)

@@ -86,6 +86,12 @@ namespace RepositoryLayer
             return resutls;
         }
 
+        public async Task<ActionResult<Card>> getCard(int id)
+        {
+            var temp = await _gameContext.cards.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return temp;
+        }
+
         /// <summary>
         /// Returns a list of all players.
         /// </summary>

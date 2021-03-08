@@ -10,7 +10,7 @@ export class CardsComponent implements OnInit {
   card: Card = {
   id: 1,
   attackNumber: 2,
-  defenseNumber: 3,
+  defenceNumber: 3,
   inDeck: true,
   cardClass: "yes",
   cardName: 'Magic card',

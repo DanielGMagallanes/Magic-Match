@@ -10,7 +10,7 @@ import { CardModel } from './card-model';
 })
 export class CardService {
   private url = "https://api.magicthegathering.io/v1/cards";
-  private url2 = "https://magic-match-api.azurewebsites.net/api/MagicAPI/";
+  private url2 = "https://localhost:44301/api/MagicAPI/";
   private jsonUlr = "https://jsonplaceholder.typicode.com/posts";
 
   httpOptions = {

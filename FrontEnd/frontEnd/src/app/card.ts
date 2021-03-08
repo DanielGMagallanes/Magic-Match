@@ -4,7 +4,7 @@ export interface Card {
     cardName: string;
     cardClass: string;
     attackNumber: number;
-    defenseNumber: number;
+    defenceNumber: number;
     inDeck: boolean;
     imageURL: string;
     qty: number;

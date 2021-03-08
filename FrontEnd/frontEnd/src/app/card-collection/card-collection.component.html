@@ -7,8 +7,8 @@
   
     <div class="row">
         <div  *ngFor="let card of cards" class="col-sm-2" style="background-color:white;">
-            <a routerLink ="/cardDetails/1">
-                 <img  src={{card.imageURL}} alt="carss" width="100" height="100">
+            <a routerLink ="/cardDetails/{{card.id}}" [card]="card">
+                 <img  src={{card.imageURL}} alt="cards" width="100" height="100">
             </a >
         </div>    
     </div>
