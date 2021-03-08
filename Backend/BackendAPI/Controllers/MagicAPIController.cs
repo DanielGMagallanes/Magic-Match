@@ -46,7 +46,7 @@ namespace BackendAPI.Controllers
         [Route("cardByName/{name}")]
         public async Task<ActionResult<Card>> GetCardByName(string name)
         {
-            return await _businessLayer.GetCardById(name);
+            return await _businessLayer.GetCardByName(name);
         }
         /// <summary>
         /// This take a BoostForPlayer which contains the set id and the 

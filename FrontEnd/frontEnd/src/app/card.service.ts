@@ -32,12 +32,12 @@ export class CardService {
   }
 
   //Gets the name Parameter from the json in the api
-  searchForCard(cardName: string): Observable<Card>{
+  searchForCard(cardName: string): Observable<CardModel>{
     if(!isNaN(Number(cardName))){
       return this.httpClient.get<Card>(this.url2 + "cardById/" + Number(cardName), this.httpOptions);
     }
     else{
-      return this.httpClient.get<Card>(this.url2 + "cardByName/" + cardName, this.httpOptions);
+      return this.httpClient.get<CardModel>(this.url2 + "cardByName/" + cardName, this.httpOptions);
     }
   }
 

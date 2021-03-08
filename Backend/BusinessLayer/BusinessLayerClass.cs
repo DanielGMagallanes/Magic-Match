@@ -183,7 +183,7 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<ActionResult<Card>> GetCardById(string name)
+        public async Task<ActionResult<Card>> GetCardByName(string name)
         {
             ICardService service = serviceProvider.GetCardService();
             var result = await service.Where(x => x.Name, name).AllAsync();
