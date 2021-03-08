@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import {catchError, map, take} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import { CardModel } from './card-model';
+import { Card } from './card';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,13 @@ export class CardService {
   }
 
   //Gets the name Parameter from the json in the api
-  searchForCard(cardName:string): Observable<any>{
-    return this.httpClient.get(this.url2 + "cardByName/" + cardName, this.httpOptions);
+  searchForCard(cardName: string): Observable<Card>{
+    if(!isNaN(Number(cardName))){
+      return this.httpClient.get<Card>(this.url2 + "cardById/" + Number(cardName), this.httpOptions);
+    }
+    else{
+      return this.httpClient.get<Card>(this.url2 + "cardByName/" + cardName, this.httpOptions);
+    }
   }
 
   /*

@@ -33,7 +33,7 @@ export class CardCollectionComponent implements OnInit {
   }
 
   GetCards(){
-    this.playerservice.GetCards(this.collection).subscribe(x => this.cards =x);
+    this.playerservice.GetCards(this.collection).subscribe(x => this.cards = x);
   }
 
 }
