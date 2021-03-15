@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { GetCardsComponent } from './get-cards/get-cards.component';
 import { MemoryActionComponent } from './memory-action/memory-action.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
+import { TradeHubComponent } from './trade-hub/trade-hub.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SearchBoxComponent } from './search-box/search-box.component';
     LoginComponent,
     GetCardsComponent,
     MemoryActionComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    TradeHubComponent
   ],
   imports: [
     BrowserModule,
